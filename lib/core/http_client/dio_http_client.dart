@@ -16,7 +16,7 @@ class DioHttpClient with InfraLogger {
           connectTimeout: timeout,
           sendTimeout: timeout,
           receiveTimeout: timeout,
-          headers: {"User-Agent": userAgent},
+          headers: {"User-Agent": "v2rayNG/1.8.5"},
         ),
       );
       _dio[mode]!.interceptors.add(
@@ -54,18 +54,7 @@ class DioHttpClient with InfraLogger {
   int port = 0;
 
   String userAgent;
-  // bool isPortOpen(String host, int port, {Duration timeout = const Duration(milliseconds: 200)}) async{
-  //   try {
-  //     Socket.connect(host, port, timeout: timeout).then((socket) {
-  //       socket.destroy();
-  //     });
-  //     return true;
-  //   } on SocketException catch (_) {
-  //     return false;
-  //   } catch (_) {
-  //     return false;
-  //   }
-  // }
+  
   Future<bool> isPortOpen(String host, int port, {Duration timeout = const Duration(seconds: 5)}) async {
     try {
       final socket = await Socket.connect(host, port, timeout: timeout);
@@ -143,7 +132,7 @@ class DioHttpClient with InfraLogger {
 
     return Options(
       headers: {
-        if (userAgent != null) "User-Agent": userAgent,
+        "User-Agent": "v2rayNG/1.8.5",
         if (basicAuth != null) "authorization": basicAuth,
         // "Accept": "application/json",
         // "Content-Type": "application/json",
